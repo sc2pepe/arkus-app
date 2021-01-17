@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './styles/css/App.css';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import ContactsList from './components/ContactsList';
+import ContactForm from './components/ContactForm';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface AppProps {
+  dispatch: Dispatch,
+  contacts: Contact[]
 }
 
-export default App;
+const App = ({ dispatch, contacts }: AppProps) => {
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route path='/:id?' component={ContactsList} />
+        </Switch>
+      </Router>
+    </div >
+  );
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    dispatch
+  };
+};
+
+const mapStateToProps = (state: AppState) => {
+  const { contacts } = state;
+
+  return {
+    contacts
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

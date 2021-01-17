@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+form {
+    width: 320px;
+    margin: 10px auto;
+    input {
+        width: 100%;
+        border: 2px solid gray;
+        padding: 8px 12px;
+        &:focus {
+            border-color: #f06d06;
+        }
+    }
+    img {
+        max-width: 50%;
+    }
+    .error {
+        color: red;
+    }
+}
